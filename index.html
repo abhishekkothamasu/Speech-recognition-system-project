@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Reset Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #007BFF, #00d2d2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 10px;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        /* Static Header */
+        .static-header {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* Login Container Styling */
+        .login-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Input Styling */
+        input {
+            width: 90%;
+            margin: 12px 0;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Button Styling */
+        button {
+            width: 90%;
+            margin: 12px 0;
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Forgot Password Styling */
+        .forgot-password {
+            margin-top: 20px;
+        }
+
+        .forgot-password a {
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .static-header {
+                font-size: 24px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            button, input {
+                font-size: 14px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="static-header">
+    Welcome to Speech Recognition System
+</div>
+
+<div class="login-container">
+    <h1>Login</h1>
+    <input type="text" id="login-id" placeholder="Enter Login ID">
+    <input type="password" id="login-password" placeholder="Enter Password">
+    <button id="login-btn">Login</button>
+    <button id="register-btn">Register</button>
+    <div class="forgot-password">
+        <a href="forgot-password.html">Forgot Password?</a>
+    </div>
+</div>
+
+<script>
+    // Login button functionality
+    document.getElementById('login-btn').addEventListener('click', () => {
+        const loginId = document.getElementById('login-id').value.trim();
+        const loginPassword = document.getElementById('login-password').value.trim();
+
+        const user = JSON.parse(localStorage.getItem(loginId)); // Retrieve user info from localStorage
+
+        if (user && user.password === loginPassword) {
+            localStorage.setItem('currentUser', loginId);
+            window.location.href = 'speech.html';
+        } else {
+            alert('Invalid Login ID or Password!');
+        }
+    });
+
+    // Redirect to registration page
+    document.getElementById('register-btn').addEventListener('click', () => {
+        window.location.href = 'register.html';
+    });
+</script>
+
+</body>
+</html>

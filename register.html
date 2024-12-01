@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        /* Reset Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #007BFF, #00d2d2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        /* Register Container Styling */
+        .register-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Input Styling */
+        input {
+            width: 90%;
+            margin: 12px 0;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Button Styling */
+        button {
+            width: 90%;
+            margin: 12px 0;
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Back Button Styling */
+        #back-btn {
+            background-color: #6c757d;
+        }
+
+        #back-btn:hover {
+            background-color: #5a6268;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 22px;
+            }
+
+            button, input {
+                font-size: 14px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="register-container">
+    <h1>Register</h1>
+    <input type="text" id="register-id" placeholder="Enter Name">
+    <input type="password" id="register-password" placeholder="Enter Password">
+    <input type="text" id="register-mobile" placeholder="Enter Mobile Number">
+    <button id="register-user-btn">Register</button>
+    <button id="back-btn">Back to Login</button>
+</div>
+
+<script>
+    // Register button functionality
+    document.getElementById('register-user-btn').addEventListener('click', () => {
+        const registerId = document.getElementById('register-id').value.trim();
+        const registerPassword = document.getElementById('register-password').value.trim();
+        const registerMobile = document.getElementById('register-mobile').value.trim();
+
+        if (registerId && registerPassword && registerMobile) {
+            if (localStorage.getItem(registerId)) {
+                alert('User already exists. Use a different name.');
+            } else {
+                const userData = JSON.stringify({ password: registerPassword, mobile: registerMobile });
+                localStorage.setItem(registerId, userData);
+                alert('Registration Successful!');
+                window.location.href = 'index.html';  // Redirect to login page after successful registration
+            }
+        } else {
+            alert('Please fill out all fields.');
+        }
+    });
+
+    // Back to login button
+    document.getElementById('back-btn').addEventListener('click', () => {
+        window.location.href = 'index.html';
+    });
+</script>
+
+</body>
+</html>
